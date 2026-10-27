@@ -6,8 +6,6 @@
 
 Built for Grok Bot and any agent that can load `SKILL.md` skills and connect to the RankMySEO MCP.
 
-> **Status: draft.** Tool names and plan gates were checked against the RankMySEO MCP catalog and read-only calls on a real account. Every factual rule was checked against a primary source (Google, the crawler vendors, GA4 help). The set has not yet been run end to end on a fresh customer account. Sources: [the skill review](docs/skill-review-2026-10-23.md).
-
 ## Quick start
 
 1. **Add the skills.** Copy or symlink the folders under `skills/` into your agent's skills directory. Start from `skills/seo/`, it routes everything else.
