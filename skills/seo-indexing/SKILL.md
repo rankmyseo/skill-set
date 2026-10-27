@@ -48,7 +48,7 @@ If the capability list changes, re-check it before you tell the owner what you c
 Ask up to two questions at a time:
 
 1. **Who submits?** The owner has approved IndexNow from the agent, one request per batch. For each batch, ask: "Shall I send the IndexNow request for this batch?" Google Search Console and Bing submissions stay with the owner. Do nothing without a yes for the batch.
-2. **Google Business Profile:** only if the business has a physical place customers visit. Ask: "Do you want Google Business Profile connected?" Do not push it for online-only businesses. The agent cannot connect it, so the owner does it and you give the steps.
+2. **Google Business Profile:** only if customers visit a physical place, or the business travels to customers in a set area. Ask: "Do you want Google Business Profile connected?" Do not push it for online-only businesses. The agent cannot connect it, so the owner does it and you give the steps from `seo-local`.
 
 If the owner says yes for this batch:
 - Check that the key file loads at the site root, at `/{key}.txt`, before you send anything.
@@ -67,7 +67,7 @@ If the owner says yes for this batch:
 2. Submit the sitemap.
 
 **Google Business Profile (only if chosen)**
-1. Claim or update the profile, with the address, hours, and categories.
+1. Claim or update the profile, with the address, hours, and categories. Follow the profile steps in `seo-local`.
 
 **Do not use:**
 - The Google Indexing API for these pages. Google restricts it to job postings and livestream pages.
@@ -107,7 +107,7 @@ Use this when the batch is ready:
 > 2. Request indexing for the homepage and the top [5 to 10] pages in URL Inspection.
 > 3. Submit the sitemap in Bing Webmaster Tools.
 >
-> Two questions: do you want me to send the IndexNow request for you? And do you want Google Business Profile connected? If it is a physical place, I'll give you those steps too.
+> Two questions: do you want me to send the IndexNow request for you? And do you want Google Business Profile connected? If customers visit you or you travel to them, I'll give you those steps too.
 >
 > Reply with the date you did each step. I'll note the check-back dates.
 

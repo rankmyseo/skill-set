@@ -1,6 +1,6 @@
 ---
 name: seo-go-live-check
-description: The first-weeks checklist after a website goes live. Confirms Google can find and read the site, the tracked keywords are checking, and the owner's numbers have started arriving. Use during the first month after a site first goes live. For a batch of new pages, use seo-indexing.
+description: The first-weeks checklist after a website goes live. Confirms Google can find and read the site, the tracked keywords are checking, and the owner's numbers have started arriving. Use during the first month after a site first goes live, and before and after a redesign, a domain move, or a template change. For a batch of new pages, use seo-indexing.
 ---
 
 # SEO go-live check
@@ -43,6 +43,32 @@ Check the accessibility tree on the homepage and one service page. Every button,
 - **Crawling and indexing:** pages show impressions in `search_console`. Move on to `seo-maintenance-loop` after about four weeks.
 - **Waiting:** the sitemap is submitted, there are no errors, and impressions are few or none. Tell the owner that new sites often take weeks to show search traffic. Set a date to check again.
 - **Broken:** a key page returns 404 or redirects wrongly, the sitemap or robots file is missing, the homepage is set to `noindex`, or the host blocks crawlers. Name the one fix. Make the change in the builder only if the owner asks.
+
+## Redesigns and releases
+
+Use this before and after a redesign, a move to a new domain or platform, or a change to a shared template. A release can drop titles, canonicals, or the main text without anyone seeing it on screen.
+
+**Before the release, take a snapshot.** Pick the pages that get the most Search Console clicks, plus every money page. For each one, record the URL, status code, title, description, H1, canonical, robots meta tag or `X-Robots-Tag` header, hreflang links, JSON-LD types, and whether the main text is in the first HTML response. Save a copy of `/robots.txt` and the list of URLs in the sitemap. Note each page's clicks for the last 28 days.
+
+If any URL will change, write the redirect map first (`seo-existing-site`). Each old URL gets a server-side permanent redirect (`301` or `308`) to its closest new page.
+
+**After the release, compare.** Check the staging site first if there is one, then the live site the same day. Flag:
+
+- A status code that changed, or an old URL that does not redirect
+- `noindex` or a robots.txt rule that was not there before
+- A canonical that now points somewhere else
+- A title or H1 that lost the page's keyword
+- A JSON-LD type that disappeared
+- Main text that is no longer in the first HTML response
+- Sitemap URLs that redirect or return errors
+
+Fix what broke before you request indexing. Then run the days 0 to 2 basics above, add a row to the change log (`seo-reporting`), and check the same pages in Search Console after one week and after four.
+
+For a move to a new domain:
+
+- The owner submits a Change of Address in Search Console for the old domain, for every verified version of it (with and without www, and subdomains).
+- Keep the redirects for at least a year, as Google advises.
+- Ranks can move around for a few weeks or more while Google recrawls. Tell the owner before the move, not after.
 
 ## What to tell the owner
 

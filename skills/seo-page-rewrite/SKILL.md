@@ -69,6 +69,21 @@ Count the characters in the title and description. Re-read the text for each phr
 - Sourced claims helped in a simulated study of generative answers. That study did not test live assistants, and it found that citing sources lowered the visibility of top-ranked sites. Do not promise that a citation will earn an AI mention.
 - Keyword stuffing did not help in that study, and it hurts search too. Leave it out.
 
+## Who, how, and why (Google's people-first checks)
+
+You are an AI writing for the owner. Google's guidance on helpful content asks three things of every page:
+
+- **Who wrote it.** Use a real byline where a reader expects one, linked to a real author or About page. Never invent an author, a headshot, a credential, or a quote. If the owner has no author to name, publish under the business name.
+- **How it was made.** Put the owner's first-hand facts on the page: what they did, tested, or saw, with their own photos when they have them. Ask for these facts. If AI did most of the writing and a reader would wonder how the page was made, suggest a short note saying so, and let the owner decide.
+- **Why it exists.** The page should help a reader who came to the site directly. If its only reason is to catch a search, do not write it.
+
+Also from the same guidance:
+
+- Google has no preferred word count. Write until the reader's question is answered, then stop.
+- Do not change a page's date unless the content changed substantially.
+- Do not add or delete pages in bulk to make the site look fresh. Google says it does not help.
+- Health, money, safety, and legal topics need facts that match expert consensus. Ask the owner who checked them, and name that person on the page.
+
 ## Hand back
 
 For each changed item, show:

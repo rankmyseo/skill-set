@@ -20,7 +20,7 @@ Skip any question the owner has answered. Every question can be skipped. Ask no 
 5. Do you have a domain yet? If so, what is it?
 6. What do your customers call this? Their own words beat a marketing term.
 7. How much SEO do you know: beginner, intermediate, or expert? For a beginner, explain each step with one example. For an expert, keep it short.
-8. Do customers visit a physical place? If yes, do you want Google Business Profile connected? Ask only if they say yes to a physical place. You connect it yourself, and I will give you the steps.
+8. Do customers visit a physical place, or do you travel to them in a set area? If yes, do you want Google Business Profile connected? Ask only if they say yes to either. You connect it yourself, and I will give you the steps (`seo-local`).
 
 ## 2. Write the business brief back to the owner
 
@@ -116,6 +116,22 @@ Rules that follow:
 - A hub needs at least three spokes. Fewer than three is a single guide instead. This is a working rule, not a measured one. Note it in the plan.
 - A goal of visits, not sign-ups, has no money pages. Its hubs are sections, and its informational pages are articles, measured by visits and returning readers.
 
+### Pages made from one template
+
+You can write many pages fast, so this is where a plan can break Google's spam policies. Google names two that apply:
+
+- **Doorway pages:** pages for many similar searches, such as one page per city, that send the reader on to the same final page.
+- **Scaled content:** many pages made mainly to rank, with little original value, however they were written. AI writing many pages without adding value is one of Google's examples.
+
+So, before planning a set of pages from one template (cities, products, comparisons, integrations):
+
+1. Each page needs facts that exist only for that page: a real address, staff, hours, prices, stock, photos, reviews, or data the owner holds. Changing a city name is not a different page.
+2. If the owner cannot supply those facts, plan one page that covers all of them instead, such as "Areas we serve" with a list.
+3. Show the owner the count and the unique facts for each page, and get a yes before the first page is written.
+4. Start with a few pages. Add more only after Search Console shows the first ones indexed and getting impressions.
+
+There is no safe number of pages. The test is whether each page helps a reader who arrives on it.
+
 ## 6. Build the topical map and the visual site structure
 
 - Each topic cluster gets one **hub** page. Each supporting page is a **spoke** that links to its hub. Hubs link to related hubs.
@@ -150,4 +166,6 @@ Save one markdown file the owner keeps. It includes:
 - A plan copied from competitors' pages copies their gaps. Start from the buyer's questions.
 - Do not invent customer numbers, reviews, or results. Ask, or leave a placeholder.
 - Add a city to a page only when the owner serves that city.
+- A business with a place customers visit, or a service area, also needs `seo-local` before the build.
+- A comparison page ("X vs Y", "alternatives to X") states only facts about the rival that can be checked, with the date checked. Ask the owner before naming a rival on the site.
 - Do not present unvalidated keywords as validated. Label each one.

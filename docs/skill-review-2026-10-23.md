@@ -130,13 +130,41 @@ Searched the tools connected to this session for Search Console, Bing, IndexNow,
 | R5-6 | Search Console's Change of Address tool is used for domain moves | Google Search Central updates, June 2026 entries | Verified |
 | R5-7 | Redirect chains and 301 mapping | Standard practice | Adopted as practice |
 
+## Round 6: claude-seo review (26 Oct 2026)
+
+Source: [AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo), commit `6be93f4` (22 Oct 2026), MIT. It has 26 skills, 19 subagents, Python scripts, and paid-data extensions. Its `/seo <command> <url>` entry is one hub skill that routes to sub-skills. There is no separate commands folder.
+
+| # | Claim in claude-seo | Check | Verdict |
+| --- | --- | --- | --- |
+| R6-1 | One hub skill named `seo` gives a simple `/seo <command>` entry | Read `skills/seo/SKILL.md` and `docs/COMMANDS.md` | Adopted. Our router is now `seo`, with 15 commands. We did not use `user-invocable` or `argument-hint`, because the Agent Skills specification allows only `name`, `description`, `license`, `compatibility`, `metadata`, and `allowed-tools` |
+| R6-2 | Search, training, and user-request crawlers have separate names: `OAI-SearchBot` / `GPTBot` / `ChatGPT-User`; `Claude-SearchBot` / `ClaudeBot` / `Claude-User`; `PerplexityBot` / `Perplexity-User`; `Applebot` / `Applebot-Extended` | OpenAI crawler docs; Anthropic help article (7 Apr 2026); Perplexity crawler docs; Apple "About Applebot" (4 Sep 2026) | Verified. Added as a table in `seo-site-setup`, section 6. Also verified: Applebot follows Googlebot rules when robots.txt has no Applebot rule; `Perplexity-User` generally ignores robots.txt; OpenAI says robots.txt may not apply to `ChatGPT-User` |
+| R6-3 | Local results depend on relevance, distance, and prominence; no paid ranking | Google Business Profile help, "Tips to improve your local ranking" | Verified. New skill `seo-local` |
+| R6-4 | Review gating and incentives are not allowed | Google Maps user-contributed content policy, fake engagement and rating manipulation | Verified. In `seo-local`, section 4 |
+| R6-5 | Business Profile rules: real-world name, fewest specific categories, no virtual office, one profile per location, service areas within about two hours' drive, hide the address for a service-area business | Google Business Profile guidelines | Verified. In `seo-local`, section 1 |
+| R6-6 | Local ranking factor percentages (proximity 55.2%, reviews about 20%, "magic threshold" of 10 reviews) | Third-party surveys and studies | Not adopted. Not primary sources, and not reproducible |
+| R6-7 | `aggregateRating` on LocalBusiness | Google LocalBusiness structured data docs | claude-seo scores it as a plus. Google recommends it only for sites that collect reviews about other businesses. Our skills say not to mark up the business's own rating |
+| R6-8 | Doorway pages and scaled content abuse | Google spam policies | Verified. Added to `seo-launch-plan` as "Pages made from one template". claude-seo's 30-page warning and 50-page hard stop are its own thresholds; we did not adopt a number |
+| R6-9 | Check the Search Status Dashboard before blaming the site for a drop | Google "Using the Search Status Dashboard"; Google "Core updates" | Verified. Wait at least a full week after a core update completes, compare a week before and after, avoid changing pages that dropped only slightly, and treat deleting content as a last resort. Added to `seo-maintenance-loop`, "When traffic or ranks drop" |
+| R6-10 | Snapshot SEO fields before a deploy and compare after (drift) | Standard practice; Google site-move docs for redirects | Adopted as practice, without a database or scripts. Google: 301 or 308, Change of Address for every verified version, keep redirects at least a year, rankings can fluctuate for weeks. Added to `seo-go-live-check`, "Redesigns and releases" |
+| R6-11 | E-E-A-T and people-first content | Google "Creating helpful, reliable, people-first content" | Verified. Added "Who, how, and why" to `seo-page-rewrite`: real bylines, no invented authors, no preferred word count, no date changes without substantial edits, disclose AI where a reader would expect it. Byline and first-hand facts added to the `seo-page-brief` owner facts |
+| R6-12 | Product markup needs `name` plus `offers`, `review`, or `aggregateRating`; one product per page; JavaScript markup slows shopping crawls; one URL per currency | Google product snippet docs | Verified. One rule in `seo-site-setup`, section 9 |
+| R6-13 | Images: `img` with `src`, no CSS images, descriptive file names, no keyword stuffing in alt, representative `og:image` | Google image SEO best practices | Verified. Added to `seo-site-setup`, section 11 |
+| R6-14 | `x-default`, fully qualified hreflang URLs; Google detects language from the page | Google "Localized versions of your pages" | Verified. Added to `seo-site-setup`, section 12 |
+| R6-15 | Fetched pages are untrusted data; text addressed to the agent is a finding | claude-seo security section | Adopted. Extended the honesty rule in `seo` |
+| R6-16 | SEO Health Score 0 to 100 with fixed category weights | No source for the weights | Not adopted. It would be an invented number |
+| R6-17 | GEO statistics (citations from the first 30% of a page, 130 to 170 word passages, platform citation shares) | Single third-party studies | Not adopted. Our GEO rules stay with the published study already reviewed in Round 1 |
+| R6-18 | Paid data extensions and a Python runtime | Not a fact claim | Not adopted. Our skills run on any agent with no install. The data comes from RankMySEO, Search Console, and GA4 |
+| R6-19 | Community footer after each report | Not a fact claim | Not adopted |
+
+The review rules in `seo-local` restate Google's own policy for one surface. They are not the wider manipulation policy the owner declined on 24 Oct 2026.
+
 ## Decisions log
 
 | Date | Decision | Owner's words | Where it lives |
 | --- | --- | --- | --- |
 | 23 Oct 2026 | Social research allowed in the launch plan, for the platforms the owner uses | "yes you may use social research for social media" | `seo-launch-plan`, step 4b |
 | 23 Oct 2026 | The owner submits sitemaps and indexing requests | "the one who submit is the user" | `seo-indexing` |
-| 24 Oct 2026 | Weekly review and monthly summary by default; daily digest only with GA4 or Search Console connected | "a daily report ... if the user website connect to Google Analytics or sort of the thing" | `seo-maintenance-loop`, `rankmyseo-seo-agent` |
+| 24 Oct 2026 | Weekly review and monthly summary by default; daily digest only with GA4 or Search Console connected | "a daily report ... if the user website connect to Google Analytics or sort of the thing" | `seo-maintenance-loop`, `seo` (renamed from `rankmyseo-seo-agent` on 26 Oct 2026) |
 | 24 Oct 2026 | Business Profile asked at intake, only for a physical place | "online or physical location business not really required" | `seo-launch-plan`, question 8 |
 | 24 Oct 2026 | llms.txt is valid for some uses (developer tools and coding agents that read it when pointed at it); not used by Google Search; stays optional | "llms.txt is valid for some issue" | `seo-site-setup`, section 8 |
 | 24 Oct 2026 | IndexNow sent by the agent, one request per batch, with the owner's key, after the key file check and the owner's confirmation | "yes you can send it" | `seo-indexing`, `README` |
@@ -144,8 +172,10 @@ Searched the tools connected to this session for Search Console, Bing, IndexNow,
 | 24 Oct 2026 | Scenario tests: awaiting approval of the ten scenarios | "ok", read as acknowledgement only | Canvas `seo-agent-skills-overview` |
 | 24 Oct 2026 | Keep the three-spoke rule for a hub, as a working rule | "keep it" | `seo-launch-plan`, page classification |
 | 24 Oct 2026 | The agent may ask one or two questions at a time, not only one | "1-2 question to a user still okay" | `seo-launch-plan` intake, `seo-indexing` |
-| 24 Oct 2026 | Manipulation policy not built. The off-site prompt (ready-to-send Reddit replies, review-site pitches, listicle outreach) is rejected as written | "then it's not worth it" | Review file, Round 6 notes |
+| 24 Oct 2026 | Manipulation policy not built. The off-site prompt (ready-to-send Reddit replies, review-site pitches, listicle outreach) is rejected as written | "then it's not worth it" | This log only |
+| 26 Oct 2026 | Router renamed to `seo`, with `/seo <command>` entries. Sub-skill names keep the `seo-` prefix | "the skill slash is simple, so easy to use" | `seo`, `README` |
+| 26 Oct 2026 | Business Profile also offered to service-area businesses, not only physical places, per Google's guidelines | Not asked. Follows Google's guidelines (R6-5) | `seo-launch-plan`, question 8; `seo-indexing`; `seo-local` |
 
 ## Attribution
 
-`marketingskills` is MIT licensed, copyright Corey Haines (2025). `skill-suites` is MIT licensed, copyright PawBytes (2026). We wrote our own text from the verified facts above. We did not copy passages.
+`marketingskills` is MIT licensed, copyright Corey Haines (2025). `skill-suites` is MIT licensed, copyright PawBytes (2026). `claude-seo` is MIT licensed, copyright agricidaniel (2026). We wrote our own text from the verified facts above. We did not copy passages.

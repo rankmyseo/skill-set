@@ -53,6 +53,8 @@ Common ones:
 - Offer, with what is included and what is not
 - Price, or how a price is set, and what is shown publicly
 - Who runs the business, and the credentials that matter
+- The byline: the real person who wrote or checked the page, or the business name if there is none
+- First-hand detail: what the owner did, tested, or saw, and photos of it
 - Proof: real customers, results, or reviews the owner is allowed to show
 - Location, service area, opening hours, and contact method
 - Legal details the owner must show, such as company name and address

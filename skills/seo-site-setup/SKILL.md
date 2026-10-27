@@ -86,10 +86,25 @@ Why this matters for search and AI: WCAG requires every control to have a progra
 2. Do you allow AI companies to train their models on your content? Blocking training crawlers does not affect whether your pages appear in AI search answers.
 3. Do you allow AI tools to read a page when a person asks about it?
 
+Each vendor uses separate names for search, training, and reading on a person's request. Block only the names that match the owner's answer:
+
+| Vendor | AI search answers (question 1) | Model training (question 2) | Read on a person's request (question 3) |
+| --- | --- | --- | --- |
+| OpenAI | `OAI-SearchBot` | `GPTBot` | `ChatGPT-User`. OpenAI says robots.txt rules may not apply to it |
+| Anthropic | `Claude-SearchBot` | `ClaudeBot` | `Claude-User` |
+| Perplexity | `PerplexityBot` | Perplexity says its crawler is not used for training | `Perplexity-User`. Perplexity says it generally ignores robots.txt |
+| Google | `Googlebot`. AI Overviews and AI Mode come from the normal Search index | `Google-Extended`, which also covers Gemini grounding | Not controlled by robots.txt |
+| Apple | `Applebot` (Siri, Spotlight, Safari) | `Applebot-Extended` | Not listed |
+
 Other facts that matter for the answers:
-- Google-Extended is the robots.txt token for Gemini training and grounding. It does not affect Google Search. Blocking it does affect Gemini answers grounded in your content.
+- Blocking a training name leaves the search name allowed. A site can block `GPTBot` and still appear in ChatGPT search answers through `OAI-SearchBot`.
+- Never block `Googlebot` to stop AI use. That removes the site from Google Search, including AI Overviews.
+- Google-Extended does not affect Google Search. Blocking it does affect Gemini answers grounded in your content.
+- If robots.txt has no rule for `Applebot` but has one for `Googlebot`, Applebot follows the Googlebot rule.
+- A rule for one person-request name does not cover the others, and some of them ignore robots.txt. If the owner says no to question 3, say that robots.txt cannot fully enforce it.
+- Changes can take about a day to apply, per OpenAI and Perplexity.
 - Record the owner's answers as Content Signals in robots.txt when the owner wants that (`ai-train`, `search`, `ai-input`).
-- Before writing bot-specific rules, check each vendor's current crawler documentation for the names. Do not guess them.
+- Vendors add and rename crawlers. Before writing the rules, open each vendor's crawler page and confirm the names in this table are current.
 
 After any hosting or CDN change, open `/robots.txt` again. Some one-click settings add rules that block search crawlers by accident.
 
@@ -110,7 +125,9 @@ After any hosting or CDN change, open `/robots.txt` again. Some one-click settin
 ## 9. Structured data (JSON-LD), validated
 
 - Use JSON-LD. Mark up only what is visible on the page.
-- Homepage: Organization and WebSite. Inner pages: BreadcrumbList. Posts: Article. Local business: LocalBusiness with a real address.
+- Homepage: Organization and WebSite. Inner pages: BreadcrumbList. Posts: Article. Local business: LocalBusiness with a real address (see `seo-local`).
+- Product pages in a shop: Product with `name` and an `offers` block that has `price` and `priceCurrency`. Use one page per product, not a category page. Put the markup in the first HTML response; Google says markup added by JavaScript makes shopping crawls less frequent and less reliable. Use one URL per currency.
+- Do not mark up the business's own star rating on its own site. Google shows review stars for LocalBusiness only on sites that collect reviews about other businesses.
 - Do not add FAQPage or HowTo for a search appearance. Google no longer shows those rich results. Structured data is not required for Google's AI features.
 - Validate every template. Use the Schema.org validator for syntax and vocabulary. Use Google's Rich Results Test for the features Google still supports. The target is zero errors. Review warnings; do not ignore them.
 - Validate again after every change to a template or a CMS plugin.
@@ -127,11 +144,17 @@ After any hosting or CDN change, open `/robots.txt` again. Some one-click settin
 
 - Compress images. Set width and height so the layout does not jump while the page loads.
 - Lazy-load images below the fold. Do not lazy-load the hero image.
+- Use an `img` element with a `src`, even inside `picture`. Google does not index images set in CSS.
+- Name files for what they show (`black-leather-sofa.jpg`, not `IMG00023.jpg`). Place each image near the text it belongs to.
+- Alt text describes the image in context. Do not fill it with keywords; Google says that can be treated as spam.
+- Set `og:image` to an image that represents the page. Not the logo, and not an image of text.
 
 ## 12. Languages
 
 - One language per URL. Each language gets its own page. Research each language's keywords on its own.
-- If you use hreflang: each version lists itself and its matches, the links are reciprocal, every target returns 200, and the codes are valid (`en-GB`, not `en-UK`).
+- If you use hreflang: each version lists itself and its matches, the links are reciprocal, every target returns 200, and the codes are valid (`en-GB`, not `en-UK`). Use full URLs with `https://`.
+- Add `x-default` for the page a visitor should see when no language matches, such as a language picker or the main language.
+- Google does not read the language from `hreflang`, the `lang` attribute, or the URL. It reads the page. A page with only the menu translated is still a duplicate.
 
 ## 13. Measurement, before launch
 

@@ -65,6 +65,27 @@ Rank the candidates by impact first, then effort:
 - **Why:** the number you saw, its source, and its window.
 - **Check:** what to look at, and when. Use two weekly checks or four weeks of Search Console data, whichever is later.
 
+## When traffic or ranks drop
+
+Use this when the owner says visits, clicks, or ranks fell, or when the weekly round shows a drop. Find where it fell before you guess why.
+
+1. **Confirm it.** Use one source, complete days, and the same weekdays in both windows. Compare with the same weeks last year when Search Console has them, to rule out a seasonal dip.
+2. **Find where.** In Search Console, split by page, query, country, device, and search type (web, image, video, news). One page, one section, and the whole site point to different causes.
+3. **Check the tracking.** If GA4 visits fell and Search Console clicks did not, suspect the tag or the cookie banner before search.
+4. **Check your own changes.** Read the change log (`seo-reporting`) for the window. A redesign, a move, or a template change points to the release check in `seo-go-live-check`.
+5. **Check Google.** Open the Google Search Status Dashboard (status.search.google.com) for a ranking update or an incident in the window. If an update is still rolling out, wait. Google advises waiting at least a full week after it finishes, then comparing a week after with a week before it started.
+6. **Check what Google sees.** On the pages that fell: status code, `noindex`, canonical, and robots.txt. Ask the owner to open the Page indexing, Manual actions, and Security issues reports in Search Console if you cannot reach them. In RankMySEO, run `site_issues`.
+7. **Check rivals.** `keyword_history` on the keywords that fell, then `rank_compare` to see who passed the site.
+
+How to act on it:
+
+- A small drop on a page that still ranks well, such as position 2 to 4, needs no big change. Google advises against changing pages that already perform well.
+- A large drop after a core update calls for the people-first checks in `seo-page-rewrite` on the pages that fell most, and on the site as a whole. Do not make quick fixes such as removing an element because someone said it hurts SEO.
+- Deleting pages is a last resort. Propose it only for pages written for search and not for people, and only with the owner's yes.
+- Recovery after a core update can take months. Say so, and set the next check date.
+
+Report what fell, where, the most likely cause and the evidence for it, what you could not check, and at most three actions.
+
 ## Checking AI answers (optional)
 
 Use this when the owner asks whether AI assistants mention the site.
