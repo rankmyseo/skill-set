@@ -1,6 +1,6 @@
 ---
 name: seo-maintenance-loop
-description: The recurring check for a live website. Finds the few opportunities worth acting on this week (keywords near the top, pages with search demand but weak clicks, on-page issues, competitor gaps, link changes), ranks them, and gives the owner three actions. Use for weekly or monthly reviews, or when the owner asks what to fix or write next.
+description: The recurring check for a live website. Finds the few opportunities worth acting on this week (keywords near the top, pages to refresh or merge, pages with search demand but weak clicks, on-page issues, competitor gaps, link changes), ranks them, and gives the owner three actions. Also covers finding why traffic or ranks dropped. Use for weekly or monthly reviews, when the owner asks what to fix or write next, or when clicks, visits, or ranks fell.
 ---
 
 # SEO maintenance loop
@@ -25,12 +25,14 @@ Steps marked RankMySEO need the owner's RankMySEO account. If the owner does not
 1. `account_status` (RankMySEO): confirm the plan and that nothing is refused.
 2. `project_overview`: the headline numbers, average position, how many keywords moved, and `nextSteps`.
 3. `next_actions`: the ranked to-do list from on-page issues, keywords close to the top, and page ideas. Starter and above. Read the top rows. Do not copy all of them.
-4. Search Console for 28 days, compared with the previous window (`search_console` in RankMySEO, or a direct connector).
-5. `list_keywords`. Run `keyword_history` on any keyword that dropped.
-6. `site_issues` when `next_actions` shows on-page problems. Use `issue_pages` for the URLs behind one issue.
-7. Rivals, when saved (Starter and above): `list_competitors` to see who is saved, `keyword_gap` for keywords they rank for that the site does not, and `competitor_traffic` for organic visits to the site and each rival. Use `competitor_traffic` when the owner asks how the site compares. It queues a collect for any domain not yet pulled, so call it again later.
-8. `backlink_review` only when the owner asks about links, or when lost links point to important pages. Start with `linkStatus: "lost"` for pages that matter. For spam review, pass `spamScoreAbove: 20` and `limit: 20`. Use `savedOnly: true` to page through the same saved report without starting a new collection. Score filters exclude rows with no score, so say how many rows had none.
-9. The GA4 pages report, to see what visitors do after they land (`analytics_pages` in RankMySEO, or a direct connector).
+4. `page_updates` (Starter and above): one action per page (refresh, tune, expand, rewrite, merge, split, or wait), ordered by rough clicks to win back. Its clicks are for ordering, not a forecast. Leave `keep` pages and `wait` rows alone. If it answers `no_pages`, the site's pages have not been read yet; ask the owner to open the site's pages in the dashboard so they are read, then try again next round.
+5. Search Console for 28 days, compared with the previous window (`search_console` in RankMySEO, or a direct connector).
+6. `list_keywords`. Run `keyword_history` on any keyword that dropped.
+7. `site_issues` when `next_actions` shows on-page problems. Use `issue_pages` for the URLs behind one issue.
+8. `site_pages` (Starter and above) when you need to know which page owns which keyword: every crawled page with its role (home, money, supporting) and the biggest keyword it ranks for. The role is a guess from the path and the keyword; confirm money pages with the owner. A topic with no page needs a new one; two pages on one keyword may need a merge.
+9. Rivals, when saved (Starter and above): `list_competitors` to see who is saved, `keyword_gap` for keywords they rank for that the site does not, and `competitor_traffic` for organic visits to the site and each rival. Use `competitor_traffic` when the owner asks how the site compares. It queues a collect for any domain not yet pulled, so call it again later.
+10. `backlink_review` only when the owner asks about links, or when lost links point to important pages. Start with `linkStatus: "lost"` for pages that matter. For spam review, pass `spamScoreAbove: 20` and `limit: 20`. Use `savedOnly: true` to page through the same saved report without starting a new collection. Score filters exclude rows with no score, so say how many rows had none.
+11. The GA4 pages report, to see what visitors do after they land (`analytics_pages` in RankMySEO, or a direct connector).
 
 Do not run every step every round. Pick the steps the last round left open.
 
@@ -44,8 +46,11 @@ Do not run every step every round. Pick the steps the last round left open.
 | Search Console query with many impressions at position 30 or lower | The page may be the wrong owner, or too thin | Check that this page is the right owner. If not, decide whether a new page is needed |
 | Tracked keyword that fell across several checks | A stale page, or a rival moved up | `keyword_history`, then `rank_compare` to see who passed the site |
 | `site_issues` item that touches many pages | A template problem | Fix it once in the template, not page by page |
+| `page_updates` row marked `merge` or `split` | Two of the site's pages compete for one keyword | Pick the owner page with `seo-content-refresh` |
+| `page_updates` row marked `refresh`, or a page whose clicks fell | A stale or off-intent page | Plan it with `seo-content-refresh` |
+| Pages that rank for nothing and get no impressions | Pages that earn nothing | `seo-content-refresh`, section "Pages that earn nothing". Never delete in a weekly round |
 | `keyword_gap` keyword with clear buyer intent and no owner page | A missing page | Propose one page using the rules in `seo-launch-plan` |
-| Not enough candidates for the next round | More keywords are needed | `research_site` (Starter and above) reads clusters from the site as it is. `start_auto_add` queues a fuller website review. It is a write, so it needs the owner's yes first. Nothing is tracked until the owner picks it |
+| Not enough candidates for the next round | More keywords are needed | `research_site` (Starter and above) returns clusters and competitors from the last website review. When no review has run yet, it starts one, the same as `start_auto_add`. Both use the daily research budget, so ask the owner first. Nothing is tracked until the owner picks it |
 | `backlink_review`: lost links to an important page | A moved or removed page | Check the page still exists. Redirect it if it moved |
 | A pattern of spammy-looking new links | Possible bad links | Review the rows with `backlink_review`. Offer the disavow file only when the owner asks, using `disavow_export` (Starter and above). It returns the saved list as a text file and does not submit anything to Google. Never say a disavow is needed without evidence |
 
@@ -56,7 +61,7 @@ Rank the candidates by impact first, then effort:
 - Pages that already get impressions or sit near the top beat new pages. A new page takes weeks to show.
 - Issues that stop crawling or indexing beat cosmetic ones.
 - One template fix that touches many pages beats many one-page fixes.
-- Stop at three. Put the rest under a short backlog heading.
+- Stop at three. Put the rest under a short backlog heading. If the owner has time for more, offer a sprint with `seo-quick-wins`.
 
 ## Output for each action
 
@@ -70,12 +75,14 @@ Rank the candidates by impact first, then effort:
 Use this when the owner says visits, clicks, or ranks fell, or when the weekly round shows a drop. Find where it fell before you guess why.
 
 1. **Confirm it.** Use one source, complete days, and the same weekdays in both windows. Compare with the same weeks last year when Search Console has them, to rule out a seasonal dip.
-2. **Find where.** In Search Console, split by page, query, country, device, and search type (web, image, video, news). One page, one section, and the whole site point to different causes.
+2. **Find where.** In Search Console, split by page, query, country, device, and search type (web, image, video, news). One page, one section, and the whole site point to different causes. RankMySEO's `search_console` gives pages (with `clicksChange` when `pagesComparable` is true), queries for one window, and the daily series; the country, device, and search type splits need Search Console itself, through the owner or a direct connector. Sort pages and queries by the absolute number of clicks lost, not by percentage; a small page that lost 80% can matter less than a big one that lost 10%.
 3. **Check the tracking.** If GA4 visits fell and Search Console clicks did not, suspect the tag or the cookie banner before search.
 4. **Check your own changes.** Read the change log (`seo-reporting`) for the window. A redesign, a move, or a template change points to the release check in `seo-go-live-check`.
 5. **Check Google.** Open the Google Search Status Dashboard (status.search.google.com) for a ranking update or an incident in the window. If an update is still rolling out, wait. Google advises waiting at least a full week after it finishes, then comparing a week after with a week before it started.
 6. **Check what Google sees.** On the pages that fell: status code, `noindex`, canonical, and robots.txt. Ask the owner to open the Page indexing, Manual actions, and Security issues reports in Search Console if you cannot reach them. In RankMySEO, run `site_issues`.
 7. **Check rivals.** `keyword_history` on the keywords that fell, then `rank_compare` to see who passed the site.
+8. **Check the market.** If saved rivals fell too (the `months` series in `competitor_traffic`, same months as the drop), the drop is likely seasonal or market-wide, not something the site did. Check demand with `seo-trends` before changing pages.
+9. **Check the intent.** Look at what ranks now for the keywords that fell, if you can search, or ask the owner. If the results show a different kind of page than before (guides where there were product pages, or the reverse), the searcher's intent shifted. Reshape the page with `seo-page-rewrite` rather than adding more of the same.
 
 How to act on it:
 

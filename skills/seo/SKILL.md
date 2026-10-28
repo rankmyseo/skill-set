@@ -1,6 +1,6 @@
 ---
 name: seo
-description: Start here for any SEO request on a website, or when the owner types /seo with a command such as plan, setup, check, or drop. Routes a site owner through planning, setup, launch checks, local search, and ongoing maintenance using RankMySEO tools, Search Console, and GA4. Use when someone asks to create, launch, check, or improve a site's search presence.
+description: Start here for any SEO request on a website, or when the owner types /seo with a command such as plan, setup, check, wins, rivals, or drop. Routes a site owner through planning, setup, launch checks, local search, product pages, quick wins, content refresh, competitors, trends, a 90-day roadmap, and ongoing maintenance using RankMySEO tools, Search Console, and GA4. Use when someone asks to create, launch, check, or improve a site's search presence.
 ---
 
 # RankMySEO SEO agent
@@ -21,13 +21,21 @@ The owner can type `/seo`, a command, and an optional site, page, or keyword. Re
 | `/seo write <page or keyword>` | Write or rewrite a page's title, description, and copy | `seo-page-rewrite` |
 | `/seo setup [site]` | Technical and on-page setup while the site is built or fixed | `seo-site-setup` |
 | `/seo local [site]` | Business profile, reviews, and location pages for a place customers visit or a service area | `seo-local` |
+| `/seo product [site or page]` | Product and category pages, variants, Product markup, and Merchant Center | `seo-product-pages` |
 | `/seo launch [site]` | First-month checks after the site goes live | `seo-go-live-check` |
 | `/seo release [site]` | Before and after a redesign, a move, or a template change | `seo-go-live-check`, section "Redesigns and releases" |
 | `/seo index [pages]` | Hand off a batch of new or changed pages for indexing | `seo-indexing` |
 | `/seo audit <site>` | First look at a site that is already live | `seo-existing-site` |
 | `/seo check [site]` | The weekly review, ending in three actions | `seo-maintenance-loop` |
 | `/seo drop [site]` | Find why clicks, visits, or ranks fell | `seo-maintenance-loop`, section "When traffic or ranks drop" |
-| `/seo report [week or month]` | The owner's report and the change log | `seo-reporting` |
+| `/seo wins [site]` | A short sprint on the keywords and pages closest to more clicks, with before and after | `seo-quick-wins` |
+| `/seo refresh [site or page]` | Plan fixes for pages that are losing clicks | `seo-content-refresh` |
+| `/seo prune [site]` | Decide what to do with pages that earn nothing | `seo-content-refresh`, section "Pages that earn nothing" |
+| `/seo rivals [site]` | Find search rivals, benchmark them, and watch what they change | `seo-competitors` |
+| `/seo gaps [site]` | Keywords and topics rivals win that the site misses | `seo-competitors`, sections "Keyword gaps" and "Content gaps" |
+| `/seo trends [site or topic]` | Rising, falling, and seasonal searches, checked against social and news | `seo-trends` |
+| `/seo roadmap [site]` | A 90-day plan with goals, initiatives, and 30, 60, and 90 day milestones | `seo-roadmap` |
+| `/seo report [week, month, or exec]` | The owner's report, the executive summary, and the change log | `seo-reporting` |
 | `/seo data [question]` | What a Search Console or GA4 number means | `seo-search-data` |
 | `/seo goals` | Turn the owner's leads or sales into GA4 key events | `seo-conversion-tracking` |
 
@@ -43,7 +51,13 @@ The owner can type `/seo`, a command, and an optional site, page, or keyword. Re
 | The site is being built or fixed | Setup | `seo-site-setup` |
 | The site went live in the last few weeks, or a redesign or move is planned | Go-live | `seo-go-live-check` |
 | Customers visit a place, or the business travels to them | Local | `seo-local` |
+| The site sells products online | Products | `seo-product-pages` |
 | Clicks, visits, or ranks fell | Drop | `seo-maintenance-loop` |
+| Asks for quick wins, or wants more than the weekly three actions | Quick wins | `seo-quick-wins` |
+| Pages are sliding, are out of date, or earn nothing | Refresh | `seo-content-refresh` |
+| Asks who they compete with, or what rivals do better | Rivals | `seo-competitors` |
+| Asks what people search for now, or when to publish seasonal pages | Trends | `seo-trends` |
+| Asks for a strategy or a plan for the next quarter | Roadmap | `seo-roadmap` |
 | A batch of pages is ready to be indexed, or new pages are not showing in search | Indexing | `seo-indexing` |
 | A site that is already live and that you have not seen before | Baseline | `seo-existing-site` |
 | Choosing which keywords to target, for a new or an existing site | Keywords | `seo-keyword-selection` |
@@ -93,6 +107,9 @@ These change the account and use plan slots or the daily research budget:
 - `add_project`, `add_keyword`, `add_competitor`
 - `check_ranks` (queues a fresh check)
 - `start_auto_add` (queues a website review)
+- `research_site` when the site has no keyword list ready yet: it then starts the same website review. Call it freely only when a review already finished
+
+A new `social_research` answer spends everyday lookups or social credits from the monthly allowance. Check `social_lookups` for a saved answer first, and never retry a failed lookup on your own.
 
 Before any of them, say what it will use and get a clear yes. Do not call them to test a tool. Do not chain them without asking.
 

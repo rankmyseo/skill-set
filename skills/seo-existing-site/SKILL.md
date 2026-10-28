@@ -25,9 +25,10 @@ Acceptance: every URL in the inventory has one decision and one reason, and the 
 
 One row per URL. Sources, in order:
 
-1. The sitemap, if one exists. Read it and list every URL.
-2. Search Console pages, for URLs that already earn impressions. Include ones the sitemap does not list.
-3. The homepage and its main navigation, for pages linked from the site.
+1. `site_pages` (RankMySEO, Starter and above): every crawled page with its title, word count, role, the biggest keyword it ranks for, and how many keywords it ranks for. If it answers `queued`, ask again later. `rankingOffCrawl` counts ranking keywords on pages the crawl did not read; find those pages in the next two sources.
+2. The sitemap, if one exists. Read it and list every URL.
+3. Search Console pages, for URLs that already earn impressions. Include ones the sitemap does not list.
+4. The homepage and its main navigation, for pages linked from the site.
 
 For each URL, record: the title, the H1, the status code, the Search Console clicks and impressions, the page's job (money, tool, hub, informational, or support), and the owner's notes.
 
@@ -41,17 +42,17 @@ Say what the inventory does not cover. A page that is neither in the sitemap nor
 | Refresh | The page has the right job but the copy is thin, stale, or off-intent. Rewrite with `seo-page-rewrite` |
 | Merge | Two or more pages answer one question. Keep the stronger one, fold in the useful parts of the others, and redirect the rest |
 | Redirect | The page is retired and a better page owns its topic. Use a 301 redirect |
-| Remove | The page has no job, no traffic, and no links. Confirm with the owner before you remove it |
+| Remove | The page has no job, no traffic, and no links. Confirm with the owner before you remove it, then return 404 or 410 (`seo-content-refresh` section 5) |
 
 Each decision needs a reason in one sentence, with the number that supports it. "Keep: 240 impressions, position 6 for the main query" is a reason. "Keep: looks fine" is not.
 
 ## 5. Check for competing pages
 
-Search Console's query data and page data come back separately in RankMySEO, so it cannot show which page ranks for which query. Use this heuristic:
+- `page_updates` (Starter and above) marks pages `merge` or `split` when two of the site's pages compete for one keyword, and adds a `may_compete` reason when another page may answer the keyword better. Start there.
+- `site_pages` shows the biggest keyword each page ranks for, among the keywords RankMySEO has collected. Two pages with the same one are likely competing. Many pages show none; that means no collected keyword, not no traffic.
+- Without RankMySEO, group the inventory by primary keyword, taken from the title and H1, and mark pages that share one as competing. Where a direct Search Console connection returns query and page together, use that to confirm.
 
-- Group the inventory by primary keyword, taken from the title and H1.
-- Where two or more pages share a primary keyword, mark them as competing. Name the one that should own it, and make the others merge or redirect.
-- Where a direct Search Console connection returns query and page together, use that to confirm. Say which method you used.
+For each group, name the page that should own the keyword, and make the others merge or redirect. Say which method you used.
 
 ## 6. Plan redirects for every URL that moves
 
@@ -71,7 +72,7 @@ Save one file the owner keeps:
 - The redirect map
 - The headline numbers and the date they were read
 - Open questions for the owner
-- Next steps: `seo-keyword-selection` for the next targets, then `seo-maintenance-loop`
+- Next steps: `seo-keyword-selection` for the next targets, `seo-content-refresh` for pages marked refresh or with no search visibility, `seo-competitors` to name the search rivals, then `seo-maintenance-loop`
 
 ## Do not
 

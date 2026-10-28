@@ -41,7 +41,7 @@ RankMySEO keyword tools need a saved site.
 
 - **No saved site yet:** ask for the domain. Call `account_status` for slots, then `add_project` after the owner's yes. A guest session must call `request_link` first, and the owner opens the link.
 - **`keyword_planner`** (`project`, `q` set to a seed keyword, `country` from the brief): read it until `status` is `ready`. Use volume and difficulty only where they appear. Unknown stays unknown.
-- **`research_site`:** use it once the site has content. It returns clusters from the site as it is.
+- **`research_site`:** use it once the site has content. It returns clusters from the site as it is. If no website review has run yet, the call starts one, which uses the daily research budget; ask the owner first.
 - **`keyword_gap`:** use it when the competitor is saved. It shows keywords the competitor ranks for that the site does not.
 - **City or region:** the keyword tools take a country code, not a city. City-level volume is not available. Say so, and do not guess it.
 
@@ -167,5 +167,7 @@ Save one markdown file the owner keeps. It includes:
 - Do not invent customer numbers, reviews, or results. Ask, or leave a placeholder.
 - Add a city to a page only when the owner serves that city.
 - A business with a place customers visit, or a service area, also needs `seo-local` before the build.
+- A shop that sells products online also needs `seo-product-pages` before the build, for variant URLs, filters, and Product markup.
+- Not sure who the search rivals are? `seo-competitors` section 1 finds them; they are often guides or directories, not the businesses the owner names.
 - A comparison page ("X vs Y", "alternatives to X") states only facts about the rival that can be checked, with the date checked. Ask the owner before naming a rival on the site.
 - Do not present unvalidated keywords as validated. Label each one.

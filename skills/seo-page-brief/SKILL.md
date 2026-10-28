@@ -1,6 +1,6 @@
 ---
 name: seo-page-brief
-description: Write a content brief for one new page before it is drafted, and collect the facts the owner must supply first (prices, team, proof, hours, location, and similar). Sets reader, intent, outline, schema type, links, and call to action. Use before writing any new page from zero.
+description: Write a content brief for one new page before it is drafted, and collect the facts the owner must supply first (prices, team, proof, hours, location, and similar). Checks what ranks now, then sets reader, intent, angle, outline, schema type, links, and call to action. Use before writing any new page from zero.
 ---
 
 # Page brief
@@ -23,11 +23,25 @@ Write a brief for each page in the page map. A brief is one file. Do not write t
 
 State the question the page answers in the first screen. Then list the questions the reader will ask next, in the order they will ask them. Use this list to build the outline.
 
+## 2b. Check what ranks now
+
+Look at the pages that rank for the owner keyword before you set the outline. Search for it if you can browse; otherwise ask the owner to paste the top results. For a tracked keyword, `rank_compare` shows where saved rivals sit.
+
+Note, for the top five results:
+
+- **Format:** guide, list, comparison, product or category page, tool, local page, or video.
+- **What they all cover:** the sections a reader expects to find.
+- **What none of them has:** the first-hand detail, price, case, or local knowledge the owner can add.
+
+Match the format searchers get today; a guide rarely ranks where the results are all product pages. Earn the place with the owner's facts, not by copying or rewording the rivals. Google asks for original value beyond what other pages say.
+
+If the results show no clear format, or no rival you can read, say so in the brief.
+
 ## 3. Set the outline
 
 - One H1, matching the intent in plain words.
 - H2 sections, each answering one of the questions from step 2.
-- For a hub: one section per subtopic, 80 to 150 words each, with a link to the page that owns it.
+- For a hub: one short section per subtopic that answers it in brief and links to the page that owns it. Write to the answer, not to a word count; Google has none.
 - For a money page: the offer, the proof, the price or the way to start, and the answers to objections, in that order.
 - For a tool page: what the tool returns, its limit, and the link to the money page.
 
@@ -64,7 +78,7 @@ Never invent these. Leave a bracketed placeholder, and mark the page as blocked 
 
 ## 8. Record the brief
 
-Save it with the page map. The brief includes: the page type, the owner keyword, the reader, the intent, the outline, the links, the schema type, the call to action, the owner facts, and their status (answered, pending, or blocked).
+Save it with the page map. The brief includes: the page type, the owner keyword, the reader, the intent, what ranks now and the angle, the outline, the links, the schema type, the call to action, the owner facts, and their status (answered, pending, or blocked).
 
 ## Hand off
 

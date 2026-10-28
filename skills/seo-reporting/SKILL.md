@@ -1,6 +1,6 @@
 ---
 name: seo-reporting
-description: Standard formats for the change log and the owner report. The change log records every page change with its date, reason, and expected effect, so later checks have a baseline. The owner report is a short weekly or monthly summary the owner can read without SEO knowledge. Use after any change to a live site, and when writing the owner's weekly or monthly report.
+description: Standard formats for the change log and the owner report. The change log records every page change with its date, reason, and expected effect, so later checks have a baseline. The owner report is a short weekly or monthly summary the owner can read without SEO knowledge, and the executive summary is a one-page scorecard with the decisions a manager or client must make. Use after any change to a live site, and when writing the weekly, monthly, or executive report.
 ---
 
 # Reporting
@@ -45,7 +45,21 @@ Use the same order, over 28 days. Add:
 - Which of last month's actions had a result, and whether it was positive, negative, or too early to tell.
 - Any change log row whose check date has passed, with its result filled in.
 
-## 4. Do not
+## 4. The executive summary
+
+For a manager, a client, or the end of a quarter (`/seo report exec`). One page, read in two minutes. Use this order:
+
+1. **Headline:** one sentence on what search did for the business in the period.
+2. **Scorecard:** four to six numbers, each with this period, the period before, the change, the source, and the window. Pick from clicks and impressions (Search Console), visits from search and key events (GA4), tracked keywords in the top 3 and top 10 (RankMySEO), and rivals' visits from search (`competitor_traffic`, marked as estimates).
+3. **What worked:** up to three changes from the change log whose check date has passed, with their result.
+4. **What did not:** up to three, with the cause if it is known.
+5. **Risks:** rivals closing in on money keywords, pages sliding, open technical problems.
+6. **Decisions needed:** each one with the options, the evidence, and what you recommend.
+7. **Next period:** the three to five priorities, from `seo-roadmap` when one exists.
+
+Use the same numbers as the weekly reports, so the two never disagree. Leave out any metric without a source; write "not reported" instead of a guess.
+
+## 5. Do not
 
 - Put numbers in the report without a source and a window.
 - Report a result before its check date.

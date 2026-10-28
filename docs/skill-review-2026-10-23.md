@@ -158,6 +158,53 @@ Source: [AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo), c
 
 The review rules in `seo-local` restate Google's own policy for one surface. They are not the wider manipulation policy the owner declined on 24 Oct 2026.
 
+## Round 7: public SEO prompt library review (27 Oct 2026)
+
+Source: the Semrush MCP prompt library (semrush.com/mcp/prompt-library), read on 27 Oct 2026. It has 17 use cases, 38 workflows, and 152 step prompts. It is not open licensed, so we used it only as a map of use cases and a prompt pattern. Every skill and prompt here is our own text, written for RankMySEO tools.
+
+What we took as design, not as fact:
+
+- Use case, then workflow, then step prompts that run in order.
+- Each step names its output table columns, its sort order, and a row limit.
+- A later step reuses the earlier step's output if it is in the conversation, and otherwise builds it first.
+- Losses are sorted by absolute change, not percentage.
+
+| # | Use case or claim | Check | Verdict |
+| --- | --- | --- | --- |
+| R7-1 | Market landscape and search rivals | Our tools: `research_site`, `rank_compare`, `competitor_traffic`, `keyword_gap` | Adopted as `seo-competitors` section 1 and `prompts/map-your-market.md` |
+| R7-2 | Keyword and content gaps | `keyword_gap`, `site_pages` | Adopted in `seo-competitors` sections 3 and 4. Rival brand names go only to a comparison page under the existing `seo-launch-plan` rule. Google's people-first guidance asks for original value beyond what other sources say, so the gap step never rewrites rival pages |
+| R7-3 | Monitor competitor moves and growth | `rank_compare`, `competitor_traffic`, `keyword_gap` | Adopted as the monthly watch with owner-agreed alert rules. Rival visits are labelled as estimates |
+| R7-4 | Quick wins, sprint, measure | `page_updates` (tune, expand, refresh, `results`, `afterEdit`), `list_keywords`, `search_console` | Adopted as `seo-quick-wins`. The library's fixed volume and difficulty cut-offs have no source; we did not adopt them. Positions 4 to 20 are labelled a working rule |
+| R7-5 | Refresh underperforming pages | `page_updates` refresh, rewrite, merge, split; Search Console clicks | Adopted as `seo-content-refresh` sections 1 to 3 |
+| R7-6 | Pages with no visibility can be removed, and 404 and 410 differ | Google "How HTTP status codes affect Google's crawlers": all 4xx except 429 are treated the same. Google "Troubleshoot crawling errors", soft 404: no replacement, return 404 or 410; a clear replacement, 301 | Verified, with a correction: 404 and 410 are equivalent for Google. Adopted in `seo-content-refresh` sections 4 and 5. Pages with a job outside search, and pages under three months old, are left out |
+| R7-7 | Removing old content makes a site look fresh | Google "Creating helpful, reliable, people-first content": adding or removing a lot of content to seem fresh does not help ("No, it won't"); changing dates without substantial changes is a warning sign; there is no preferred word count | Contradicted. Our cleanup removes a page only for having no job. The hub word count in `seo-page-brief` was removed |
+| R7-8 | SERP-ready briefs: match the format that ranks | Practice; Google's people-first guidance on original value | Adopted as `seo-page-brief` section 2b, "Check what ranks now" |
+| R7-9 | Traffic drops: sort by absolute loss, check whether rivals fell too, check for an intent shift | Practice | Adopted in `seo-maintenance-loop` "When traffic or ranks drop", steps 2, 8, and 9 |
+| R7-10 | Trends: rising queries, seasonality | Search Console windows; Google's people-first guidance warns against writing about trends only because they trend | Verified. Adopted as `seo-trends`, with a two-signal rule and a fit-the-business rule. Social and news signals are optional and need the owner's yes, because each new answer spends lookups |
+| R7-11 | Seasonal pages need lead time | Google "Troubleshoot crawling errors": most sites should expect several days or more before new pages are noticed and indexed | Verified. `seo-trends` section 5 says several weeks before the peak and keep the same URL |
+| R7-12 | SEO strategy and 30/60/90 plans | Practice | Adopted as `seo-roadmap`, with impact, effort, and confidence scoring, and the owner's hours as the cap |
+| R7-13 | Executive reports | Practice | Adopted as `seo-reporting` section 4 and a decision memo prompt. Numbers come from the same sources as the weekly report |
+| R7-14 | Product pages: URL structure | Google "URL structure best practices for ecommerce": no fragments for variants, `?key=value` without repeated keys, no session or tracking parameters in internal links, self-canonicals, `<a href>` links, empty category gets noindex or 404 | Verified. `seo-product-pages` section 5 |
+| R7-15 | Product pages: filters | Google "Managing crawling of faceted navigation URLs": block filter parameters in robots.txt when filtered lists need not be indexed, keep one unfiltered list; if indexed, use `&`, a fixed filter order, and 404 for empty combinations | Verified. `seo-product-pages` section 5 |
+| R7-16 | Product markup for merchant listings | Google merchant listing structured data: `name`, `image`, `offers` with an `Offer`, price above zero, `priceCurrency`; return and shipping policy can sit on `Organization`; markup in the initial HTML | Verified. `seo-product-pages` section 6 |
+| R7-17 | Merchant Center | Google "Share your product data with Google": structured data is not required, Merchant Center is required for the Shopping tab, feeds give more control over timing, automatic updates from the website fix stale price and stock | Verified. `seo-product-pages` section 7, as an owner step |
+| R7-18 | Search Console Performance report dimensions and search types | Search Console help, Performance report | Verified. Used in the drop and trend steps |
+| R7-19 | Paid search: rising costs, paid and organic balance, rival paid strategy | Needs bid, spend, and ad account data | Not adopted. Out of scope. A rival's live Google ads can be read with `social_research` tool `advertiser` on `googleads`, which shows ads, not bids or spend |
+| R7-20 | R5-5 superseded in part | `page_updates` now marks `merge` and `split`, and `site_pages` gives each page's biggest keyword | `seo-existing-site` section 5 starts with those tools. The title-and-H1 heuristic stays for owners without RankMySEO |
+
+Pre-push review, 27 Oct 2026. Read calls on a real account (`search_console`, `page_updates`, `site_pages`, `competitor_traffic`) and the tool schemas changed these rules:
+
+| # | Finding | Change |
+| --- | --- | --- |
+| R7-21 | `research_site` starts the website review when no list is ready, which uses the daily research budget | Listed with the writes in `seo`; every skill and prompt that calls it now asks first. This also fixed older text in `seo-launch-plan`, `seo-keyword-selection`, and `seo-maintenance-loop` |
+| R7-22 | `rank_compare`, `competitor_traffic`, and `keyword_gap` cover saved rivals only | Rival discovery uses the website review, the search results, and the owner; the benchmark runs after rivals are saved |
+| R7-23 | `search_console` returns query totals for one window, top 200, with no page and no previous window; pages carry `clicksChange` only when `pagesComparable` is true; no country, device, or search type split; `allowedDays` gives the plan's reach | Query trends read `days: 28` and `days: 56` and subtract. Page changes fall back to `page_updates` `search` (`prevClicks`). Splits go to Search Console itself |
+| R7-24 | `competitor_traffic` includes a monthly `months` series per site | Rival trends and the market check read it directly. Only the `keyword_gap` list needs saving month to month |
+| R7-25 | `site_pages` counts only keywords RankMySEO has collected; most pages show 0 | Search Console decides whether a page earns nothing; without it, no page is called that |
+| R7-26 | `page_updates` flags a competing page with a `may_compete` reason on tune or expand rows, not only with `merge` or `split` | Quick wins, refresh, and the baseline read `reasons` |
+
+The prompt library in `prompts/` covers 11 use cases. Every prompt names its tools, asks before any write or paid lookup, and writes "not reported" for a missing number.
+
 ## Decisions log
 
 | Date | Decision | Owner's words | Where it lives |
@@ -175,7 +222,8 @@ The review rules in `seo-local` restate Google's own policy for one surface. The
 | 24 Oct 2026 | Manipulation policy not built. The off-site prompt (ready-to-send Reddit replies, review-site pitches, listicle outreach) is rejected as written | "then it's not worth it" | This log only |
 | 26 Oct 2026 | Router renamed to `seo`, with `/seo <command>` entries. Sub-skill names keep the `seo-` prefix | "the skill slash is simple, so easy to use" | `seo`, `README` |
 | 26 Oct 2026 | Business Profile also offered to service-area businesses, not only physical places, per Google's guidelines | Not asked. Follows Google's guidelines (R6-5) | `seo-launch-plan`, question 8; `seo-indexing`; `seo-local` |
+| 27 Oct 2026 | Expand the set to the use cases in a public SEO prompt library: six new skills, nine commands, and a prompt library. Paid search use cases left out | "Let's expand all this!" | Round 7; `seo`; `prompts/` |
 
 ## Attribution
 
-`marketingskills` is MIT licensed, copyright Corey Haines (2025). `skill-suites` is MIT licensed, copyright PawBytes (2026). `claude-seo` is MIT licensed, copyright agricidaniel (2026). We wrote our own text from the verified facts above. We did not copy passages.
+`marketingskills` is MIT licensed, copyright Corey Haines (2025). `skill-suites` is MIT licensed, copyright PawBytes (2026). `claude-seo` is MIT licensed, copyright agricidaniel (2026). The Semrush MCP prompt library is not open licensed; we used it only as a map of use cases and a prompt pattern. We wrote our own text from the verified facts above. We did not copy passages.

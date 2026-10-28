@@ -126,7 +126,7 @@ After any hosting or CDN change, open `/robots.txt` again. Some one-click settin
 
 - Use JSON-LD. Mark up only what is visible on the page.
 - Homepage: Organization and WebSite. Inner pages: BreadcrumbList. Posts: Article. Local business: LocalBusiness with a real address (see `seo-local`).
-- Product pages in a shop: Product with `name` and an `offers` block that has `price` and `priceCurrency`. Use one page per product, not a category page. Put the markup in the first HTML response; Google says markup added by JavaScript makes shopping crawls less frequent and less reliable. Use one URL per currency.
+- Product pages in a shop: Product with `name`, `image`, and an `offers` block that has `price` and `priceCurrency` (more in `seo-product-pages`). Use one page per product, not a category page. Put the markup in the first HTML response; Google says markup added by JavaScript makes shopping crawls less frequent and less reliable. Use one URL per currency.
 - Do not mark up the business's own star rating on its own site. Google shows review stars for LocalBusiness only on sites that collect reviews about other businesses.
 - Do not add FAQPage or HowTo for a search appearance. Google no longer shows those rich results. Structured data is not required for Google's AI features.
 - Validate every template. Use the Schema.org validator for syntax and vocabulary. Use Google's Rich Results Test for the features Google still supports. The target is zero errors. Review warnings; do not ignore them.

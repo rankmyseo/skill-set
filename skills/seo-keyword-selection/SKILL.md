@@ -26,7 +26,7 @@ Use the evidence that exists. For a new site, the evidence is the owner's words 
 2. **Read the tracked rank.** `list_keywords` and `keyword_history` show the current position and trend for tracked keywords.
 3. **Rank the candidates.** Keywords that already show impressions and sit at positions 4 to 10 are the closest wins. Positions 11 to 20 need more work. A keyword at position 30 or lower with many impressions usually points to the wrong page or a thin one, not a quick win.
 4. **Read the competitor gap.** `keyword_gap` (Starter and above) shows keywords rivals rank for that the site does not.
-5. **Look at the site's content.** `research_site` returns clusters from the pages the site has. Use it to see what the site already covers.
+5. **Look at the site's content.** `research_site` returns clusters from the pages the site has. Use it to see what the site already covers. If no website review has run yet, the call starts one, which uses the daily research budget; ask the owner first.
 6. **Separate brand queries.** Queries that contain the brand name measure brand demand. Keep them in their own group, and do not count them as new keyword targets.
 
 ## Relevance check (judgment, for both paths)
